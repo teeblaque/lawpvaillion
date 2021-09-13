@@ -67,7 +67,7 @@ Run the database migrations.
 $ artisan migrate
 
 ## Step 9
-To access your Laravel Application visit http://localhost:8000
+To access the CRM Application visit http://localhost
 
 ## Stopping the containers
 1. To Exit the workspace.

@@ -42,7 +42,13 @@
                                 <td>{{$user->last_name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->dob}}</td>
-                                <td><img src="{{ url('client/'.$user->avatar ?? '')}}" alt="client" width="60" height="50"></td>
+                                <td>
+                                    @if ($user->avatar != null)
+                                        <img src="{{ url('client/'.$user->avatar)}}" alt="client" width="60" height="50">
+                                    @else
+                                    <img src="" alt="">
+                                    @endif
+                                </td>
                                 <td>{{$user->created_at->format('d, M Y')}}</td>
                                 <td><a href="{{ route('user.show', ['id'=> $user->id]) }}" class="btn btn-sm btn-warning pull-right">View Detials</a></td>
                             </tr>

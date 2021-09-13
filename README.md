@@ -12,6 +12,10 @@ Then run cp .env.example .env in your terminal
 
 Run php artisan key:generate
 
+Setup you database
+
+Configure your mailtrap
+
 Run Php artisan migrate
 
 ## To Serve the project

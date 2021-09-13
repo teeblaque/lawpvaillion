@@ -24,17 +24,25 @@ php artisan serve
 
 Clone the project
 
-Download docker and install on your machine
+Download docker and install on your machine, then start
 
 ## Step 1 
 Open a new instance of the terminal, navigate to the root directory of the project and execute the following command to bring all the containers up.
 
-$ docker-compose up -d
+$ docker-compose up -d --build nginx mysql
+
+## SET UP DATABASE
+1. docker-compose up -d --build nginx phpmyadmin
+2. Navigate to phpmyadmin with localhost:8081 and create your database (lawpvaillion in my case) with these credentials:
+
+Hostname: mysql
+Username: root
+Password: root
 
 ## Step 2
 When all containers are up and running, enter the app container by executing the following command.
 
-$ docker-compose exec lawpavillion_app bash
+$ docker-compose exec workspace bash
 
 ## Step 3
 Install all composer packages included in composer.json
@@ -59,32 +67,28 @@ $ cp .env.example .env
 ## Step 7
 Generate a Laravel App Key.
 
-$ php artisan key:generate
+$ artisan key:generate
 
 ## Step 8
 Run the database migrations.
 
-$ php artisan migrate
+$ artisan migrate
 
 ## Step 9
-Modify the following fields in your .env file to use the values specified in the database container.
-
-DB_CONNECTION=mysql
-DB_HOST=lawpavillion_db
-DB_PORT=3306
-DB_DATABASE=lawpavillion
-DB_USERNAME=root
-DB_PASSWORD=root
-
-## Step 10
-To access your Laravel Application visit http://localhost:8000
+To access the CRM Application visit http://localhost
 
 ## Stopping the containers
-1. Exit the app container.
+1. To Exit the workspace.
+
 $ exit
 
 2. Bring all the containers down.
+
 $ docker-compose down
+
+3. To stop the containers
+
+docker-compose stop
 
 ## License
 

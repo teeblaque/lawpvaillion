@@ -20,3 +20,6 @@ Route::post('create', [UserController::class, 'store']);
 
 //get single profile
 Route::get('user/{id}', [UserController::class, 'show'])->name('user.show');
+//Update profile picture
+Route::get('edit', [UserController::class, 'edit'])->name('user.edit');
+Route::post('update', [UserController::class, 'update'])->name('user.update');

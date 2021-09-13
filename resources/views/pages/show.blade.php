@@ -27,7 +27,8 @@
                                 <div class="mt-3">
                                     <h4>John Doe</h4>
                                     <p class="text-secondary mb-1">Full Stack Developer</p>
-                                    <button class="btn btn-primary">Update profile</button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleLargeModals"  onclick="fun_edit('{{ $user->id }}')"><i class="ti-pencil icon-md"></i>Update profile</button>
+                                    <input type="hidden" name="hidden_view" id="hidden_view" value="{{ route('user.edit') }}">
                                 </div>
                             </div>
                         </div>
@@ -93,4 +94,60 @@
             </div>
         </div>
     </div>
+
+    {{-- update modal --}}
+       <div class="modal fade" id="exampleLargeModals" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Profile Picture</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="edit_id" id="edit_id" value="">
+
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label">Avatar</label>
+                                    <input type="file" class="form-control" name="newavatar" id="avatar">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <img id="myimage" src="" width="100" height="100">
+                                </div>
+
+                                <div class="col-12">
+                                    <br><br>
+                                    <button type="submit" class="btn btn-primary px-5">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            {{-- <button type="button" class="btn btn-primary">Save</button> --}}
+                        </div>
+                    </div>
+            </div>
+        </div>
+    {{-- End update Modal --}}
+@endsection
+
+@section('scripts')
+    <script>
+        function fun_edit(id)
+        {
+            var view_url = $("#hidden_view").val();
+            $.ajax({
+                url: view_url,
+                type:"GET",
+                data: {"id":id},
+                success: function(result){
+                // console.log(result);
+                $("#edit_id").val(result.id);
+                $("#myimage").attr('src', '/client/'+result.avatar);
+            }
+        });
+    }
+    </script>
 @endsection

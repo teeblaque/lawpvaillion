@@ -84,4 +84,44 @@ class UserController extends Controller
             }
         }
     }
+
+    public function edit(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+            $info = User::find($id);
+            return response()->json($info);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'newavatar' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->with('error', $validator->errors()->first());
+            }
+
+            $id = $request->edit_id;
+            $reward = User::find($id);
+
+            if ($request->hasFile('newavatar')) {
+                $image = $request->file('newavatar');
+                $fileName = Str::random(10) . '.' . $image->getClientOriginalExtension();
+                $location = 'client/' . $fileName;
+                Image::make($image)->save($location);
+
+                $reward->avatar = $fileName;
+            }
+
+            if ($reward->save()) {
+                return back()->with('success', 'Record updated successfully');
+            }
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
 }

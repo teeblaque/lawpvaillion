@@ -24,12 +24,20 @@ php artisan serve
 
 Clone the project
 
-Download docker and install on your machine
+Download docker and install on your machine, then start
 
 ## Step 1 
 Open a new instance of the terminal, navigate to the root directory of the project and execute the following command to bring all the containers up.
 
-$ docker-compose up -d
+$ docker-compose up -d --build nginx mysql
+
+## SET UP DATABASE
+1. docker-compose up -d --build nginx phpmyadmin
+2. Navigate to phpmyadmin with localhost:8081 and create your database (lawpvaillion in my case) with these credentials:
+
+Hostname: mysql
+Username: root
+Password: root
 
 ## Step 2
 When all containers are up and running, enter the app container by executing the following command.

@@ -86,11 +86,11 @@ To access the CRM Application visit http://localhost
 
 $ exit
 
-2. Bring all the containers down.
+2. stop containers and remove all networks.
 
 $ docker-compose down
 
-3. To stop the containers
+3. stop containers
 
 docker-compose stop
 

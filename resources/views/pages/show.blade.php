@@ -138,16 +138,16 @@
         function fun_edit(id)
         {
             var view_url = $("#hidden_view").val();
-            $.ajax({
-                url: view_url,
-                type:"GET",
-                data: {"id":id},
-                success: function(result){
-                // console.log(result);
-                $("#edit_id").val(result.id);
-                $("#myimage").attr('src', '/client/'+result.avatar);
-            }
-        });
-    }
+                $.ajax({
+                    url: view_url,
+                    type:"GET",
+                    data: {"id":id},
+                    success: function(result){
+                    // console.log(result);
+                    $("#edit_id").val(result.id);
+                    $("#myimage").attr('src', '/client/'+result.avatar);
+                }
+            });
+        }
     </script>
 @endsection

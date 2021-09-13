@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -76,11 +77,11 @@ class UserController extends Controller
     public function show($id = null)
     {
         if ($id != null) {
-            $user = User::find($id);
+            $user = User::find(decrypt($id));
             if ($user) {
                 return view('pages.show', ['user' => $user]);
             }else{
-                return back()->with('error', 'Client not found');
+                return back()->with('error', 'Client record not found');
             }
         }
     }

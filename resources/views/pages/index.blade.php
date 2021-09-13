@@ -50,7 +50,7 @@
                                     @endif
                                 </td>
                                 <td>{{$user->created_at->format('d, M Y')}}</td>
-                                <td><a href="{{ route('user.show', ['id'=> $user->id]) }}" class="btn btn-sm btn-warning pull-right">View Detials</a></td>
+                                <td><a href="{{ route('user.show', ['id'=> encrypt($user->id)]) }}" class="btn btn-sm btn-warning pull-right">View Detials</a></td>
                             </tr>
                        @endforeach
                     </tbody>
